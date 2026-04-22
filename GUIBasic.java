@@ -1,52 +1,90 @@
 package main;
 
 import javax.swing.*;
+import java.io.*;
 
 public class GUIBasic {
 
 	public GUIBasic( ) {
-		JFrame frame = new JFrame("Pableo");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(null);
+		JFrame frame = new JFrame ("Pableo");
+		frame.setLocationRelativeTo(null);
 		frame.setSize(350, 200);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		
-		JLabel type = new JLabel("Customer Type");
-		JTextField txt1 = new JTextField();
-		JLabel con = new JLabel("Consumption");
-		JTextField txt3 = new JTextField();
-		JLabel total = new JLabel("Total Bill");
-		JTextField txt2 = new JTextField();
-		JButton btn1 = new JButton("Add");
-		JButton btn2 = new JButton("Delete");
-		JButton btn3 = new JButton("Update");
-		
+		JLabel type = new JLabel("Costumer Type");
+		JTextField inType = new JTextField();
 		frame.add(type);
-		frame.add(con);
-		frame.add(total);
-		frame.add(txt1);
-		frame.add(txt2);
-		frame.add(txt3);
-		frame.add(btn1);
-		frame.add(btn2);
-		frame.add(btn3);
+		frame.add(inType);
+		type.setBounds(40, -20, 150, 100);
+		inType.setBounds(150, 20, 150, 25);
 		
-		type.setBounds(30, 30, 100, 25);
-		con.setBounds(30, 60, 100, 25);
-		total.setBounds(30, 90, 100, 25);
+		JLabel consumption = new JLabel("Consumption");
+		JTextField inConsumption = new JTextField();
+		frame.add(consumption);
+		frame.add(inConsumption);
+		consumption.setBounds(40, 10, 150, 100);
+		inConsumption.setBounds(150, 50, 150, 25);
 		
-		txt1.setBounds(150, 30, 150, 25);
-		txt2.setBounds(150, 60, 150, 25);
-		txt3.setBounds(150, 90, 150, 25);
+		JLabel bill = new JLabel("Bill");
+		JTextField txtBill = new JTextField();
+		txtBill.setEditable(false);
+		frame.add(bill);
+		frame.add(txtBill);
+		bill.setBounds(40, 40, 150, 100);
+		txtBill.setBounds(150, 80, 150, 25);
 		
-		btn1.setBounds(30, 120, 80, 25);
-		btn2.setBounds(125, 120, 80, 25);
-		btn3.setBounds(220, 120, 80, 25);
+		JButton btnAdd = new JButton("Add");
+		frame.add(btnAdd);
+		btnAdd.setBounds(40, 120, 80, 25);
+		
+		btnAdd.addActionListener(e -> {		
+			double con = Double.parseDouble(inConsumption.getText());
+			double result = con * 135;
+			String billtotal = String.valueOf(result);
+			
+			txtBill.setText(billtotal);
+			
+			
+			try {
+				FileWriter fw = new FileWriter("Vehicle.txt", false);
+				
+				fw.write(inType.getText() + " " + inConsumption.getText() + " " + billtotal);
+				fw.close();
+				
+
+			} catch (IOException e1) {
+					System.out.println(e1);
+				e1.printStackTrace();
+			}
+			
+			JOptionPane.showMessageDialog(null, "Result Save to Text file!");
+			
+			});
 		
 		
+		
+		
+		JButton btnDelete = new JButton("Delete");
+		frame.add(btnDelete);
+		btnDelete.setBounds(130, 120, 80, 25);
+		btnDelete.addActionListener(e ->{
+			
+			txtBill.setText("");
+			inConsumption.setText("");
+			inType.setText("");
+				
+		});
+		
+
+		JButton btnUpdate = new JButton("Update");
+		frame.add(btnUpdate);
+		btnUpdate.setBounds(220, 120, 80, 25);
 		
 	}
+	
+
 	public static void main(String[] args) {
 		new GUIBasic();
 
