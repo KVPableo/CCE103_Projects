@@ -75,8 +75,8 @@ public class EmployeeManagement extends JFrame {
 		
 		JLabel gender = new JLabel("Gender");
 		frame.add(gender).setBounds(405,55,150,25);
-		JRadioButton m = new JRadioButton();	
-		JRadioButton fm = new JRadioButton();	
+		JRadioButton m = new JRadioButton("Male");	
+		JRadioButton fm = new JRadioButton("Female");	
 		ButtonGroup group = new ButtonGroup();
 		group.add(m);
 		group.add(fm);
@@ -111,7 +111,7 @@ public class EmployeeManagement extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		frame.add(btnAdd).setBounds(360,203,120,25);
 		
-		JButton btnRemove = new JButton("Remove");
+		JButton btnRemove = new JButton("Delete");
 		frame.add(btnRemove);
 		btnRemove.setBounds(640,203,120,25);
 		
